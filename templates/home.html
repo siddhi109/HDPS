@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome Page</title>
+        <link rel="stylesheet" href="./index.css" />
+        <link
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        rel="stylesheet"
+        />
+        <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.css"
+        rel="stylesheet"
+        />
+        <script src=
+        "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js">
+            </script>
+            <script src=
+    "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js">
+            </script>
+        <script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.js"
+        ></script>
+        <script src="//d3js.org/d3.v3.min.js"></script>
+        <script src="js/scripts.min.js"></script>
+        <script src="js/custom.js"></script>
+        <style>
+            body {
+              background-image: url('../assets/img/hero-bg.jpg');
+              background-repeat: no-repeat;
+              background-size: cover;
+            }
+    
+            .textbox{
+        
+                align-items: center;
+            }
+            .child1{
+                overflow: scroll;
+            }
+            @media screen and (max-width : 500px) {
+                .table{
+                overflow-x: scroll;
+            }
+            .hd-slider-width{
+                margin-left: 0 !important;
+            }
+            .heartDisease{
+               flex-direction: column;
+            }
+            }
+    
+            .heartDisease{
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+            }
+            </style>
+    
+            
+       
+    </head>
+    <body>
+        
+        <div class="">
+            <div class="container">
+                <div class="heartDisease" style=" color: dodgerblue;">
+                    <div class="">
+                     <h2 >Welcome to heart disease prediction system</h2>
+                    </div>
+                      <div class=" ">
+                         <button class="btn btn-danger " style="background-color: dodgerblue;" onclick="logout()">Logout</button>
+                      </div>
+                    </div> </div>
+                   <h3 style="color: dodgerblue;" class="text-center"> You are successfully logged in!!!</h3>
+                   <div>
+            </div>
+              
+            <section class="probootstrap-section" data-section="predict" id="predict">
+                <div class="container">
+                  <div class="row text-center mb100">
+                    <div class="col-md-offset-2 probootstrap-section-heading">
+                      <h2 class="mb30 text-black probootstrap-heading">Predict your Chance of Having a Heart Disease</h2>
+                      <h5>Enter the appropriate values of symptoms you face. Get the chances of you contracting heart disease based on those values.</h5>
+                    </div>
+                  </div>
+                  <!-- END row -->
+                  <!-- Main Div -->
+                  <div id="parent" >
+                        <div id="wrapper" class="ps-5" style="background: #f0f9ff;flex: column !important; border: 3.5px solid rgb(6, 103, 144); padding-top: 15px; padding-bottom: 15px; padding-right: 25px;">
+                        
+                                <h1 class="text-black probootstrap-heading text-center " style="padding-bottom:25px;" >Heart Disease Predictor</h1>
+                                <div class="card" id="makepdf">
+                            <div class="child1" style="padding-right: 20px; ">
+                                <form method="POST", action="{{url_for('home')}}">
+                                <table class="table" style="border: 3.1px solid rgb(1, 93, 133); width: 20p0x; color:rgb(0, 0, 0); font-style: bold;">
+                                  <tr>
+                                    <td >
+                                        <label class="before_slider">
+                                            Age </label></td>
+                                    <td class="input_slider">
+                                            <input type="number" class="hd-number-width" name="a" min="29" max="77" step="1" style="width: 80px; text-align: center; margin-left: 40px;"
+                                                   value="29" id="nAge2" oninput="this.form.amountRange.value=this.value" />
+                                        </td>
+                                </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="before_slider">
+                                                Sex (0=female,1=male)</label></td>
+                                        <td class="input_slider">
+                                                <input type="number" class="hd-number-width" name="b" min="0" max="1" step="1" style="width: 80px; text-align: center;margin-left: 40px;"
+                                                       value="0" id="nSex2" oninput="this.form.amountRange.value=this.value" />
+                                            </td>
+                                    </tr>
+                                    <tr>
+                                      <td><label for="nCp" class="before_slider">
+                                          Chest Pain Type (0=typical angina, 1=atypical angina, 2=non-angina, 3=asymptomatic angina)</label></td>
+                                      <td class="input_slider">
+                                              <input type="number" class="hd-number-width" name="c" min="0" max="3" step="1"style="width: 80px; text-align: center;margin-left: 40px;"
+                                                     value="1" id="nCp2" oninput="this.form.amountRange.value=this.value" />
+                                          </td>
+                                  </tr>
+                                    <tr>
+                                        <td><label for="nRestbp" class="before_slider">Resting Blood Pressure (94 - 200 mmHg)</label></td>
+                                        <td class="input_slider">
+                                                <input type="number" class="hd-number-width" name="d" min="94" max="200" step="all"style="width: 80px; text-align: center;margin-left: 40px;"
+                                                       value="94" id="nRestbp2" oninput="this.form.amountRange.value=this.value" />
+                                           </td>
+                                    </tr>
+                                    <tr>
+                                      <td><label for="nScp" class="before_slider">
+                                          Serum Cholestrol (in mg\dl)</label></td>
+                                      <td class="input_slider">
+                                              <input type="number" class="hd-number-width" name="e" min="126" max="564" step="all"style="width: 80px; text-align: center;margin-left: 40px;"
+                                                     value="126" id="nScp2" oninput="this.form.amountRange.value=this.value" />
+                                          </td>
+                                  </tr>
+                                  <tr>
+                                    <td><label for="nFbs" class="before_slider">
+                                        Fasting Blood Sugar>120mg\dl (1=true;0=false)</label></td>
+                                    <td class="input_slider">
+                                            <input type="number" class="hd-number-width" name="f" min="0" max="1" step="all"style="width: 80px; text-align: center;margin-left: 40px;"
+                                                   value="0" id="nFbs2" oninput="this.form.amountRange.value=this.value" />
+                                      </td>
+                                </tr>
+                                <tr>
+                                  <td><label for="nRec" class="before_slider">
+                                      Resting Electrocardiographic Results (0,1,2)</label></td>
+                                  <td class="input_slider">
+                                          <input type="number" class="hd-number-width" name="g" min="0" max="2" step="all"style="width: 80px; text-align: center;margin-left: 40px;"
+                                                 value="0" id="nRec2" oninput="this.form.amountRange.value=this.value" />
+                                     </td>
+                              </tr>
+                                    <tr>
+                                        <td><label for="nThalach" class="before_slider">
+                                            Thalium Stress Test Maximum Heart Rate achieved(71 - 202)</label></td>
+                                        <td class="input_slider">
+                                                <input type="number" class="hd-number-width" name="h" min="71" max="202" step="all"style="width: 80px; text-align: center;margin-left: 40px;"
+                                                       value="71" id="nThalach2" oninput="this.form.amountRange.value=this.value" />
+                                            </td>
+                                    </tr>
+                                    <tr>
+                                      <td><label for="nEia" class="before_slider">
+                                          Exercise Induced Angina(1=yes;0-no)</label></td>
+                                      <td class="input_slider">
+                                              <input type="number" class="hd-number-width" name="i" min="0" max="1" step="all"style="width: 80px; text-align: center;margin-left: 40px;"
+                                                     value="0" id="nEia2" oninput="this.form.amountRange.value=this.value" />
+                                          </td>
+                                  </tr>
+                                  <tr>
+                                    <td><label for="nSt" class="before_slider">
+                                      ST depression induced by exercise relative to rest</label></td>
+                                    <td class="input_slider">
+                                            <input type="number" class="hd-number-width" name="j" min="0" max="6.2" step="0.1"style="width: 80px; text-align: center;margin-left: 40px;"
+                                                   value="0" id="nSt2" oninput="this.form.amountRange.value=this.value" />
+                                        </td>
+                                </tr>
+                                    
+                                    
+                                    <tr>
+                                        <td><label for="nSlope" class="before_slider">
+                                           Slope of Peak Exercise ST Segment (0=flat or downsloping, 1=upsloping,2)</label></td>
+                                        <td class="input_slider">
+                                                <input type="number" class="hd-number-width" name="k" min="0" max="2" step="1"style="width: 80px; text-align: center;margin-left: 40px;"
+                                                       value="0" id="nSlope2" oninput="this.form.amountRange.value=this.value" />
+                                            </td>
+                                    </tr>
+                                    <tr>
+                                      <td><label for="nMv" class="before_slider">
+                                          Number of Major Vessels Colored by Fluoroscopy (0 - 3)</label></td>
+                                      <td class="input_slider">
+                                              <input type="number" class="hd-number-width" name="l" min="0" max="3" step="all"style="width: 80px; text-align: center;margin-left: 40px;"
+                                                     value="0" id="nMv2" oninput="this.form.amountRange.value=this.value" />
+                                          </td>
+                                  </tr>
+                                    <tr>
+                                        <td><label for="nThal" class="before_slider">
+                                            Thalium Test: (0=normal or fixed defect, 1=reversible defect)</label></td>
+                                        <td class="input_slider">
+                                                <input type="number" class="hd-number-width" name="m" min="1" max="3" step="1"style="width: 80px; text-align: center;margin-left: 40px;"
+                                                       value="0" id="nThal2" oninput="this.form.amountRange.value=this.value" />
+                                          </td>
+                                    </tr>
+          
+                                    <tr>
+                                        <td></td>
+                                        <td class="input_slider">
+                                            <input type="submit" class="btn btn-primary" style="margin-left: -600px; width: 200px;" value="Predict" />
+                                            <input type="button" id="bat" class="btn btn-primary " style="margin-left: 150px; width: 200px;"value="Generate pdf" />
+                                            <input type="button" class="btn btn-primary mt-5" style="margin-left: 150px; width: 200px;" value="Reset All Sliders" onclick="updateOne(val01,-1)"/>
+                                           
+                                        </td>
+                                    </tr>
+                                       
+                                    </div>
+                                    </tr>
+                                </table>
+                            </form>
+                            </div>
+                            
+                            <script>
+                                var button = document.getElementById("bat");
+                                var makepdf = document.getElementById("makepdf");
+                          
+                                button.addEventListener("click", function () {
+                                    html2pdf().from(makepdf).save();
+                                });
+                            </script>
+                           
+                        
+                            <div class="child2">
+                                <script>
+                                    
+                                    var val01 = document.getElementById("nSex1").value;
+                                    var val02 = document.getElementById("nRestbp1").value;
+                                    var val03 = document.getElementById("nThalach1").value;
+                                    var val04 = document.getElementById("nCa1").value;
+                                    var val05 = document.getElementById("nCp1").value;
+                                    var val06 = document.getElementById("nSlope1").value;
+                                    var val07 = document.getElementById("nThal1").value;
+                                    updateOne(val01,0);
+          
+                                    // Check for changes in the inputs and update output bar
+                                    d3.select("#nSex1").on("input", function() {updateOne(+this.value,1);});
+                                    d3.select("#nSex2").on("input", function() {updateOne(+this.value,1);});
+                                    d3.select("#nRestbp1").on("input", function() {updateOne(+this.value,2);});
+                                    d3.select("#nRestbp2").on("input", function() {updateOne(+this.value,2);});
+                                    d3.select("#nThalach1").on("input", function() {updateOne(+this.value,3);});
+                                    d3.select("#nThalach2").on("input", function() {updateOne(+this.value,3);});
+                                    d3.select("#nCa1").on("input", function() {updateOne(+this.value,4);});
+                                    d3.select("#nCa2").on("input", function() {updateOne(+this.value,4);});
+                                    d3.select("#nCp1").on("input", function() {updateOne(+this.value,5);});
+                                    d3.select("#nCp2").on("input", function() {updateOne(+this.value,5);});
+                                    d3.select("#nSlope1").on("input", function() {updateOne(+this.value,6);});
+                                    d3.select("#nSlope2").on("input", function() {updateOne(+this.value,6);});
+                                    d3.select("#nThal1").on("input", function() {updateOne(+this.value,7);});
+                                    d3.select("#nThal2").on("input", function() {updateOne(+this.value,7);});
+          
+                                    // // Update the heart disease probability
+                                    function updateOne(value,index) {
+          
+                                        if (index == 1) {
+                                            val01 = value;
+                                        } else if (index == 2) {
+                                            val02 = value;
+                                        } else if (index == 3) {
+                                            val03 = value;
+                                        } else if (index == 4) {
+                                            val04 = value;
+                                        } else if (index == 5) {
+                                            val05 = value;
+                                        } else if (index == 6) {
+                                            val06 = value;
+                                        } else if (index == 7) {
+                                            val07 = value;
+                                        } else if (index == -1) {
+                                            // Set everything back to default state:
+                                            val01 = document.getElementById("nSex1").defaultValue;
+                                            document.getElementById("nSex1").value = val01;
+                                            document.getElementById("nSex2").value = val01;
+                                            val02 = document.getElementById("nRestbp1").defaultValue;
+                                            document.getElementById("nRestbp1").value = val02;
+                                            document.getElementById("nRestbp2").value = val02;
+                                            val03 = document.getElementById("nThalach1").defaultValue;
+                                            document.getElementById("nThalach1").value = val03;
+                                            document.getElementById("nThalach2").value = val03;
+                                            val04 = document.getElementById("nCa1").defaultValue;
+                                            document.getElementById("nCa1").value = val04;
+                                            document.getElementById("nCa2").value = val04;
+                                            val05 = document.getElementById("nCp1").defaultValue;
+                                            document.getElementById("nCp1").value = val05;
+                                            document.getElementById("nCp2").value = val05;
+                                            val06 = document.getElementById("nSlope1").defaultValue;
+                                            document.getElementById("nSlope1").value = val06;
+                                            document.getElementById("nSlope2").value = val06;
+                                            val07 = document.getElementById("nThal1").defaultValue;
+                                            document.getElementById("nThal1").value = val07;
+                                            document.getElementById("nThal2").value = val07;
+                                        }
+          
+                                        // Standardize the continuous features:
+                                        var srbp_val     = (val02-131.7157)/17.7478;
+                                        var sthalach_val = (val03-149.3278)/23.1211;
+                                        var sca_val      = (val04-0.6722)/3.0;
+          
+                                        // Disentangle the categorical features:
+                                        var cp_contr = 0.0;
+                                        if (val05 == 1) {
+                                            cp_contr = -2.2318;
+                                        } else if (val05 == 2) {
+                                            cp_contr = -1.2681;
+                                        } else if (val05 == 3) {
+                                            cp_contr = -2.1124;
+                                        }
+                                        var slope_contr = 0.0;
+                                        if (val06 == 1) {slope_contr = -1.4726;}
+                                        var thal_contr = 0.0;
+                                        if(val07 == 1) {thal_contr = 1.5009;}
+          
+                                        // Compute log-odds, then probability:
+                                        var scprod = 1.4361*val01 + 0.4415*srbp_val - 0.4431*sthalach_val + 3.7984*sca_val + cp_contr + slope_contr + thal_contr;
+                                        var drec   = 1.0/(1.0+Math.exp(-scprod));
+                                        var drecs  = height0*drec;
+                                        drec       *= 100;
+          
+                                        // Update plot:
+                                        rcolor     = percentToRGB(drec);
+                                        holder.select("rect")
+                                            .attr("y",y0+height0-drecs)
+                                            .attr("height",drecs)
+                                            .style("fill", rcolor);
+          
+                                        holder.select("text")
+                                            .text(function(){return parseFloat(Math.round(drec * 100) / 100).toFixed(2)+"%";});
+          
+                                    }
+          
+                                 
+                                </script>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                
+              </section>
+              <!-- END section -->
+              <section class="probootstrap-section probootstrap-bg-light " data-section="contact" >
+                <div class="container" >
+             
+                    <div class="col-md-3 col-md-push-1" style="margin: 50px;">
+                      <ul class="probootstrap-contact-details">
+                        <li>
+                          <span class="text-uppercase">Email <span class="icon icon-email"></span></span>
+                          srpatil701@gmail.com <br>
+                        </li>
+                        
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+               
+              </section>
+          
+              <footer class="probootstrap-footer">
+                <div class="container text-center">
+                  <div class="row">
+                    <div class="col-md-12">
+                        
+                      &copy; 2022. All Rights Reserved. <br> Designed &amp; Developed by <a href="https://github.com/sanket9591" target="_blank">Sanket <span class="icon icon-github"></span></a>; 
+                    </div>
+                  </div>
+                </div>
+              </footer>
+          
+              <script src="js/scripts.min.js"></script>
+              <script src="js/custom.js"></script>
+              
+          
+        </div>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+    
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
+    
+        <script src="firebase.js"></script>
+        <script src="welcome.js"></script>
+    </body>
+    </html>
